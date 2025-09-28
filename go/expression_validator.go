@@ -229,11 +229,12 @@ type SuspectScoreModule struct {
 
 // ----------------------------------------------------------------------------
 
-// ValidateExpression compiles the provided Expr language expression against the
-// environment schema above. It returns true when the expression is valid (i.e.
-// references only declared variables and has no syntax/type errors). Otherwise
-// it returns false.
 func ValidateExpression(expression string) bool {
 	_, err := expr.Compile(expression, expr.Env(Env{}))
 	return err == nil
+}
+
+// isExpressionValid is a thin wrapper suitable for JS/WASM exports and tests.
+func isExpressionValid(expression string) bool {
+	return ValidateExpression(expression)
 }

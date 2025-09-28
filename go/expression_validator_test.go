@@ -56,7 +56,7 @@ func TestValidateExpression(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		if got := ValidateExpression(tt.expr); got != tt.wantValid {
+		if got := isExpressionValid(tt.expr); got != tt.wantValid {
 			t.Errorf("ValidateExpression(%q) = %v, want %v", tt.expr, got, tt.wantValid)
 		}
 	}

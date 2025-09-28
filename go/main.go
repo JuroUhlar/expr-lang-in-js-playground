@@ -1,5 +1,7 @@
+//go:build !js || !wasm
+
 package main
 
 func main() {
-	// expr_demo()
+	// no-op for native build; tests use exported functions directly
 }
