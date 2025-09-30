@@ -4,6 +4,11 @@ Expr-lang is a Go-centric expression language. You might have chosen for your Go
 
 This repo is to find the best way.
 
+## Sources
+
+* https://go.dev/wiki/WebAssembly?ref=blog.mozilla.ai
+* https://www.sitepen.com/blog/compiling-go-to-webassembly
+
 
 
 ## Run
