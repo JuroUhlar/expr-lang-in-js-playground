@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WASM Expression Validator Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expression Validator Test</h1>
+    <div id="output"></div>
+
+    <script src="wasm_exec.js"></script>
+    <script>
+        const exampleExpressions = [
+            'bot == true',
+            'suspectScore >= 50',
+            'bot == unknownField',
+            'bot != 12',
+            'unknownField == true',
+        ];
+
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
+            go.run(result.instance);
+            
+            const output = document.getElementById('output');
+            const results = exampleExpressions.map(expr => 
+                `<p><code>${expr}</code> → is valid: <strong>${isExpressionValid(expr)}</strong></p>`
+            ).join('');
+            output.innerHTML = results;
+        });
+    </script>
+</body>
+</html>
